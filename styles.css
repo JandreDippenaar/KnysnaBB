@@ -203,19 +203,13 @@ p {
 }
 
 .highlights-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    justify-content: center;
-}
-
-.highlight-card {
-    flex: 0 0 calc(33.333% - 1.33rem);
-    min-width: 250px;
 }
 
 .highlight-card {
@@ -646,12 +640,8 @@ p {
     }
 
     .highlights-grid {
-        justify-content: center;
+        grid-template-columns: 1fr;
         max-width: 100%;
-    }
-    
-    .highlight-card {
-        flex: 0 0 100%;
     }
     
     .rooms-grid,
