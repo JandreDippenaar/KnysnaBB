@@ -471,21 +471,54 @@
     <script src="script.js"></script>
     
     <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvHfYq6p8-D2c6S2Af5hmdolrAQpDYXMo&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvHfYq6p8-D2c6S2Af5hmdolrAQpDYXMo&libraries=places&callback=initMap&v=weekly" async defer></script>
     <script>
-    function initMap() {
-      const center = { lat: -34.0387262, lng: 23.0694669 };
-      const map = new google.maps.Map(document.getElementById('map'), {
-        center, zoom: 15,
-        styles: [
-          { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
-          { featureType: "poi.business", stylers: [{ visibility: "off" }] },
-          { featureType: "transit", stylers: [{ visibility: "off" }] }
-        ],
-        mapTypeControl: false, streetViewControl: false
-      });
-      new google.maps.Marker({ position: center, map, title: "Knysna B&B King of Kings" });
-    }
+        function initMap() {
+          const center = { lat: -34.0387262, lng: 23.0694669 }; // map center
+          const map = new google.maps.Map(document.getElementById('map'), {
+            center, zoom: 15,
+            styles: [
+              { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+              { featureType: "poi.business", stylers: [{ visibility: "off" }] },
+              { featureType: "transit", stylers: [{ visibility: "off" }] }
+            ],
+            mapTypeControl: false, streetViewControl: false
+          });
+        
+          const marker = new google.maps.Marker({ position: center, map });
+        
+          const service = new google.maps.places.PlacesService(map);
+          const placeId = "ChIJg1m2tUHqeB4RaR82IPv3qLw";
+        
+          service.getDetails(
+            { placeId, fields: ["name","formatted_address","rating","user_ratings_total","url","geometry"] },
+            (place, status) => {
+              if (status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
+        
+              // If Google returns precise geometry, use it for the marker
+              if (place.geometry && place.geometry.location) {
+                marker.setPosition(place.geometry.location);
+                map.setCenter(place.geometry.location);
+              }
+        
+              const html = `
+                <div style="font-family: Inter, system-ui; max-width: 260px">
+                  <h3 style="margin:0 0 4px;font-size:16px">${place.name}</h3>
+                  <div style="font-size:13px;color:#475569">${place.formatted_address || ""}</div>
+                  ${place.rating ? `<div style="margin-top:6px;font-size:13px">⭐ ${place.rating} (${place.user_ratings_total} reviews)</div>` : ""}
+                  <div style="margin-top:8px">
+                    <a href="${place.url}" target="_blank" rel="noopener" style="text-decoration:none;color:#0b57d0">View on Google Maps</a>
+                  </div>
+                </div>
+              `;
+              const info = new google.maps.InfoWindow({ content: html });
+              info.open({ anchor: marker, map });
+              marker.addListener("click", () => info.open({ anchor: marker, map }));
+            }
+          );
+        }
+        window.initMap = initMap;
     </script>
+        
 </body>
 </html>
