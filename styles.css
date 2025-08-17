@@ -166,7 +166,7 @@ p {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/waterfront_header.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/waterfront_header.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -622,6 +622,17 @@ p {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .map-container {
+        margin-top: 2rem;
+        height: 300px;
+        overflow: visible;
+    }
+    
+    .map-container iframe {
+        height: 300px;
+        width: 100%;
     }
 
     .highlights-grid,
