@@ -166,7 +166,7 @@ p {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/waterfront_header.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/lagoon.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
