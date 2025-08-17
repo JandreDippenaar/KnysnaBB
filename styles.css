@@ -93,11 +93,14 @@ p {
     color: white;
     padding: 8px 16px;
     font-size: 0.9rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
 }
 
 .btn-whatsapp:hover {
     background-color: #128c7e;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
 }
 
 /* Navigation */
