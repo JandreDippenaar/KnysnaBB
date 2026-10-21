@@ -1,6 +1,6 @@
-# Knysna B&B — King of Kings Website
+# King of Kings, Knysna: Website
 
-A modern, mobile-friendly website for a budget-friendly B&B in Knysna, South Africa. Built with HTML5, CSS3, and vanilla JavaScript.
+A modern, mobile-friendly website for King of Kings, self-catering guest rooms in Knysna, South Africa. Built with HTML5, CSS3, and vanilla JavaScript.
 
 ## 🌟 Features
 
@@ -316,7 +316,7 @@ For technical support or customization requests:
 
 ## 📄 License
 
-This website is custom-built for Knysna B&B — King of Kings. All rights reserved.
+This website is custom-built for King of Kings, Knysna. All rights reserved.
 
 ---
 
