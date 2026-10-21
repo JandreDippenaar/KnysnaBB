@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     const scrollTop = document.getElementById('scrollTop');
+    const mobileCta = document.getElementById('mobileCta');
+    const hero = document.getElementById('home');
+    const contact = document.getElementById('contact');
 
     // Mobile navigation
     function setMenu(open) {
@@ -32,6 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function onScroll() {
         navbar.classList.toggle('scrolled', window.scrollY > 40);
         scrollTop.classList.toggle('visible', window.scrollY > 600);
+
+        // Show the booking bar once the hero buttons are off screen, but not over the contact section
+        const pastHero = hero.getBoundingClientRect().bottom < 0;
+        const atContact = contact.getBoundingClientRect().top < window.innerHeight;
+        mobileCta.classList.toggle('visible', pastHero && !atContact);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

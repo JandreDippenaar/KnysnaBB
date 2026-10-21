@@ -293,7 +293,7 @@ section {
 }
 
 .logo-sub {
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.32em;
     text-transform: uppercase;
@@ -350,9 +350,13 @@ section {
     display: none;
     flex-direction: column;
     gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
     background: none;
     border: none;
-    padding: 8px;
     cursor: pointer;
 }
 
@@ -428,6 +432,11 @@ section {
     bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.1rem;
     animation: bob 2.2s ease-in-out infinite;
@@ -949,6 +958,11 @@ section {
     background-color: var(--green-900);
 }
 
+/* Sticky booking bar (phones) */
+.mobile-cta {
+    display: none;
+}
+
 /* Toast notifications */
 .notification {
     position: fixed;
@@ -1058,6 +1072,55 @@ section {
         background-color: var(--cream);
     }
 
+    .contact-item a {
+        display: inline-block;
+        padding: 10px 0;
+        margin: -10px 0;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 0;
+    }
+
+    .footer-section ul li a {
+        display: inline-block;
+        padding: 10px 0;
+    }
+
+    .footer-section ul li:not(:has(a)) {
+        padding: 5px 0;
+    }
+
+    .scroll-to-top {
+        display: none;
+    }
+
+    .mobile-cta {
+        display: flex;
+        gap: 10px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 950;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        background-color: rgba(250, 247, 241, 0.97);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -6px 24px rgba(20, 42, 36, 0.12);
+        transform: translateY(110%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-cta.visible {
+        transform: translateY(0);
+    }
+
+    .mobile-cta .btn {
+        flex: 1;
+        margin-top: 0;
+        padding: 13px 16px;
+    }
+
     .navbar.menu-open .logo-name {
         color: var(--green-900);
     }
@@ -1096,9 +1159,25 @@ section {
 }
 
 @media (max-width: 560px) {
+    .hero {
+        padding: calc(var(--nav-h) + 24px) 0 80px;
+    }
+
     .hero .eyebrow {
         letter-spacing: 0.12em;
-        font-size: 0.7rem;
+        font-size: 0.72rem;
+    }
+
+    .hero-lead {
+        margin-bottom: 2rem;
+    }
+
+    .fact {
+        padding: 22px 8px;
+    }
+
+    .fact-value {
+        font-size: 1.45rem;
     }
 
     .hero .eyebrow::before {
@@ -1163,6 +1242,45 @@ section {
     .scroll-to-top {
         bottom: 20px;
         right: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    .logo-name {
+        font-size: 1.45rem;
+    }
+
+    .btn {
+        padding: 13px 22px;
+    }
+}
+
+/* Short screens: phones in landscape */
+@media (max-height: 520px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: calc(var(--nav-h) + 24px) 0 48px;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-lead {
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: row;
+    }
+
+    .hero-scroll {
+        display: none;
     }
 }
 
