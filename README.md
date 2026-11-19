@@ -157,10 +157,11 @@ Update these with actual distances from your property.
 1. **Lagoon View - Room 1** (bathroom with bath)
 2. **The Heads - Room 2**
 3. **Thesen Island - Room 3**
-4. **Blue Waters - Room 5**
+4. **Loerie - Room 4**
+5. **Blue Waters - Room 5**
 
 ### Pricing
-- In season, per person per night sharing: Lagoon View R800, Blue Waters R700, Thesen Island R600, The Heads R600
+- In season, per person per night sharing: Lagoon View R800, Blue Waters R700, Thesen Island R600, The Heads R600, Loerie R600
 - R900 to R1600 per room per night
 - All rooms include private bathrooms
 - Various amenities and views

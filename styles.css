@@ -538,10 +538,16 @@ section {
     background-color: var(--white);
 }
 
+/* Flex so an incomplete last row stays centred (5 rooms: 3 + 2) */
 .rooms-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
+}
+
+.rooms-grid > .room-card {
+    flex: 0 1 calc((100% - 3rem) / 3);
 }
 
 .room-card {
@@ -1310,8 +1316,8 @@ body.lightbox-open {
 
 /* Responsive */
 @media (max-width: 1080px) {
-    .rooms-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .rooms-grid > .room-card {
+        flex-basis: calc((100% - 1.5rem) / 2);
     }
 
     .footer-content {
@@ -1500,8 +1506,8 @@ body.lightbox-open {
     }
 
     .highlights-grid,
-    .rooms-grid {
-        grid-template-columns: 1fr;
+    .rooms-grid > .room-card {
+        flex-basis: 100%;
     }
 
     .highlight-card {
