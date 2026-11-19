@@ -928,6 +928,60 @@ body.lightbox-open {
     background-color: var(--cream);
 }
 
+/* Area video: click to play, nothing loads until then */
+.explore-video {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto 3rem;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-color: var(--green-800);
+    box-shadow: var(--shadow);
+}
+
+.explore-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-play {
+    position: absolute;
+    /* Below the poster's title so it doesn't cover the tagline */
+    top: 74%;
+    left: 50%;
+    width: 76px;
+    height: 76px;
+    display: grid;
+    place-items: center;
+    padding-left: 5px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--gold);
+    color: var(--green-900);
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.video-play:hover {
+    background-color: #d6b261;
+    transform: translate(-50%, -50%) scale(1.06);
+}
+
+.video-play:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 3px;
+}
+
+.explore-video.playing .video-play {
+    display: none;
+}
+
 .explore-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1533,7 +1587,17 @@ body.lightbox-open {
         inset: 12px -10px -12px 10px;
     }
 
-    /* Swipe through the attractions instead of stacking eight cards */
+    .explore-video {
+        margin-bottom: 2rem;
+    }
+
+    .video-play {
+        width: 60px;
+        height: 60px;
+        font-size: 1.25rem;
+    }
+
+    /* Swipe through the attractions instead of stacking six cards */
     .explore-grid {
         display: flex;
         gap: 1rem;

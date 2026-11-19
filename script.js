@@ -195,6 +195,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Area video: nothing downloads until the visitor presses play
+    const adVideo = document.getElementById('adVideo');
+    if (adVideo) {
+        const wrap = adVideo.closest('.explore-video');
+        const playBtn = wrap.querySelector('.video-play');
+        let tracked = false;
+        playBtn.addEventListener('click', () => {
+            adVideo.controls = true;
+            adVideo.play();
+        });
+        adVideo.addEventListener('play', () => {
+            wrap.classList.add('playing');
+            if (!tracked && typeof gtag === 'function') {
+                gtag('event', 'video_play', { video_title: 'Knysna area film' });
+                tracked = true;
+            }
+        });
+    }
+
     // Analytics: record booking and WhatsApp clicks as their own events
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href]');
