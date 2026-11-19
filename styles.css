@@ -552,11 +552,227 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
 }
 
-.room-card:hover .room-image img {
-    transform: scale(1.05);
+/* Room photo carousel: swipe on touch, arrows on hover, dots show position */
+.room-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+}
+
+.room-track::-webkit-scrollbar {
+    display: none;
+}
+
+.room-track:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: -3px;
+}
+
+.room-track img {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    cursor: zoom-in;
+}
+
+/* Full screen photo viewer */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(10, 20, 17, 0.96);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 14px 16px;
+    color: var(--white);
+}
+
+.lightbox-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.lightbox-count {
+    margin-left: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.lightbox-track {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+}
+
+.lightbox-track::-webkit-scrollbar {
+    display: none;
+}
+
+.lightbox-track img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px 24px;
+    object-fit: contain;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.lightbox-close,
+.lightbox-nav {
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lightbox-close {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    font-size: 1.1rem;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+.lightbox-nav[disabled] {
+    visibility: hidden;
+}
+
+@media (max-width: 560px) {
+    .lightbox-track img {
+        padding: 0 0 84px;
+    }
+
+    .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        top: auto;
+        bottom: 24px;
+        transform: none;
+    }
+}
+
+.room-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(250, 247, 241, 0.92);
+    color: var(--green-900);
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transition: opacity 0.25s ease, background-color 0.2s ease;
+}
+
+.room-prev { left: 10px; }
+.room-next { right: 10px; }
+
+.room-carousel:hover .room-nav,
+.room-nav:focus-visible {
+    opacity: 1;
+}
+
+.room-nav:hover {
+    background-color: var(--white);
+}
+
+.room-nav[disabled] {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+.room-dots {
+    position: absolute;
+    right: 14px;
+    bottom: 22px;
+    display: flex;
+    gap: 6px;
+}
+
+.room-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.room-dots span.active {
+    background-color: var(--white);
+    transform: scale(1.25);
+}
+
+/* Touch screens have no hover, so keep the arrows visible */
+@media (hover: none) {
+    .room-nav {
+        opacity: 0.85;
+        width: 32px;
+        height: 32px;
+    }
 }
 
 .room-price {
@@ -586,6 +802,16 @@ section {
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 600;
+    line-height: 1.2;
+}
+
+.room-number {
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
 }
 
 .room-features {
