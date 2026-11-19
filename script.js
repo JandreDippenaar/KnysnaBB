@@ -195,6 +195,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Analytics: record booking and WhatsApp clicks as their own events
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href]');
+        if (!link || typeof gtag !== 'function') return;
+        const href = link.href;
+        const eventName = href.includes('book.nightsbridge.com') ? 'book_click'
+            : href.includes('wa.me/') ? 'whatsapp_click'
+            : null;
+        if (!eventName) return;
+        const section = link.closest('section, header, footer, nav, .mobile-cta');
+        gtag('event', eventName, {
+            link_text: link.textContent.trim().slice(0, 100),
+            link_location: section ? (section.id || section.className.split(' ')[0]) : 'page'
+        });
+    });
+
     // Contact form: there is no backend, so compose an email in the visitor's mail app
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
