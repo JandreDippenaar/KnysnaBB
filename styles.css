@@ -917,48 +917,117 @@ body.lightbox-open {
     box-shadow: var(--shadow);
 }
 
-/* Gallery Section */
-.gallery {
+/* Explore Section: nearby attractions */
+.explore {
     background-color: var(--cream);
 }
 
-.gallery-grid {
+.explore-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 240px;
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
-.gallery-item {
-    position: relative;
-    overflow: hidden;
+.explore-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
     border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-wide {
-    grid-column: span 2;
+.explore-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
 }
 
-.gallery-item img {
+.explore-image {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+}
+
+.explore-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-.gallery-item figcaption {
+.explore-credit {
     position: absolute;
-    inset: auto 0 0 0;
-    padding: 2.5rem 1.25rem 1rem;
-    background: linear-gradient(transparent, rgba(14, 30, 26, 0.75));
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    padding: 3px 8px;
+    border-top-left-radius: var(--radius-sm);
+    background-color: rgba(14, 30, 26, 0.6);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.65rem;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.explore-credit:hover {
     color: var(--white);
+    text-decoration: underline;
+}
+
+.explore-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.25rem 1.25rem 1.4rem;
+}
+
+.explore-body h3 {
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-style: italic;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.explore-body p {
+    flex: 1;
+    margin: 0.4rem 0 0.9rem;
+    font-size: 0.9rem;
+}
+
+.explore-distance {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--gold-dark);
+}
+
+.explore-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--green-700);
+    text-decoration: none;
+}
+
+.explore-map:hover {
+    color: var(--gold-dark);
+    text-decoration: underline;
+}
+
+.explore-note {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
 }
 
 /* Location Section */
@@ -1394,9 +1463,8 @@ body.lightbox-open {
         height: 340px;
     }
 
-    .gallery-grid {
+    .explore-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 200px;
     }
 }
 
@@ -1459,13 +1527,29 @@ body.lightbox-open {
         inset: 12px -10px -12px 10px;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 220px;
+    /* Swipe through the attractions instead of stacking eight cards */
+    .explore-grid {
+        display: flex;
+        gap: 1rem;
+        margin: 0 -20px;
+        padding: 0 20px 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 0 20px;
+        scrollbar-width: none;
     }
 
-    .gallery-wide {
-        grid-column: auto;
+    .explore-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .explore-card {
+        flex: 0 0 82%;
+        scroll-snap-align: start;
+    }
+
+    .explore-card:hover {
+        transform: none;
     }
 
     .contact-form {
